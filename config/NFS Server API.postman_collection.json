@@ -1,0 +1,314 @@
+{
+	"info": {
+		"_postman_id": "1eea58ab-6e8f-41ab-b185-17c6a43f866a",
+		"name": "NFS Server API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40592982"
+	},
+	"item": [
+		{
+			"name": "Get Token",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "flask-app-client",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "test@abv.bg",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "pass",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "email openid",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/realms/flask-realm/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						"flask-realm",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload file",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful PUT request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJEX1h0Y2UzamtLX2tla0JqZ0pyR3p0UUk0blZCY2wybXRnWTYyY1V1OWJZIn0.eyJleHAiOjE3MzczMTg0OTEsImlhdCI6MTczNzMxODE5MSwianRpIjoiNzY1NWYwNTMtMmE2Mi00NTlhLWI3ZDYtNzk0NTIwNDcwNjViIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9mbGFzay1yZWFsbSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI1MGU1ZjNmYi02MTZmLTQ2YzEtOGY5Ny04Njk0ZDdlODY3NGIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJmbGFzay1hcHAtY2xpZW50Iiwic2lkIjoiY2EyNjQ0M2QtMzBlMy00NjU5LTgxMzUtOWU0ZjljNDhkNTg2IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1mbGFzay1yZWFsbSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJmbGFzay1hcHAtY2xpZW50Ijp7InJvbGVzIjpbImZsYXNrLXJvbGUiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIGVtYWlsIHByb2ZpbGUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IlRlc3QgVXNlciIsInByZWZlcnJlZF91c2VybmFtZSI6InRlc3RAYWJ2LmJnIiwiZ2l2ZW5fbmFtZSI6IlRlc3QiLCJmYW1pbHlfbmFtZSI6IlVzZXIiLCJlbWFpbCI6InRlc3RAYWJ2LmJnIn0.RpgHUWbZY6n3SapUVo8xzy_rq_y3-mkP_EpUqln7RiBNH7JMI1e6MSU9jX-jnMehpg2Utz1qKY9VZBCeFtCrrhowX7toXnlAP4_Nr-W34_nSb1ugUuwtIGcBMOj0gLL870iZK7Zjo3Ev2bDuzwGIcdwZOiSrHcv9mxJtAZc8YA41CUNSsnmB5MhcMA-5KM5zuafKNsJoa8VfIArL7RYeSWfEtyn6ZfJnFSaVLnUBGPomqmeQacIqMS1XEyagmZylxbyOXGEPu2PvV_crgp8amv6uPcYdH5seieTHCvFRAV6LtW3AD-dmomnnePHtL4Q1gt_vCN8jSYeq5KzWdloaRA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/bivanova/Downloads/file.txt"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:6000/file/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6000",
+					"path": [
+						"file",
+						"upload"
+					]
+				},
+				"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Get File Content",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful PUT request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJEX1h0Y2UzamtLX2tla0JqZ0pyR3p0UUk0blZCY2wybXRnWTYyY1V1OWJZIn0.eyJleHAiOjE3MzczMTkwMzQsImlhdCI6MTczNzMxODczNCwianRpIjoiMTY0Nzk3YWQtMTg0OC00NTMzLTk3NTEtMTk4NTQyNTI5YWUxIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9mbGFzay1yZWFsbSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI1MGU1ZjNmYi02MTZmLTQ2YzEtOGY5Ny04Njk0ZDdlODY3NGIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJmbGFzay1hcHAtY2xpZW50Iiwic2lkIjoiOWQxY2I0ZTMtOTk5Mi00YTkyLWE3YzAtMWI3NTU4NGY5NTg0IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1mbGFzay1yZWFsbSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJmbGFzay1hcHAtY2xpZW50Ijp7InJvbGVzIjpbImZsYXNrLXJvbGUiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIGVtYWlsIHByb2ZpbGUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IlRlc3QgVXNlciIsInByZWZlcnJlZF91c2VybmFtZSI6InRlc3RAYWJ2LmJnIiwiZ2l2ZW5fbmFtZSI6IlRlc3QiLCJmYW1pbHlfbmFtZSI6IlVzZXIiLCJlbWFpbCI6InRlc3RAYWJ2LmJnIn0.jR3CJH3_oTxSiRlPFLLfjJguVCThSoO1x-gozkKO386OV2SfOYnSitKwKP_Ljy-DX3hIFoi-FM-NTcvEjws-P_HkKiWqxjnZxxuIzQ9LaQ_ZzThAeLhMKtWjot2IeZjb9Xf74S-RocfSkamMEFHWi0tzGQC4eEfQWcy8XiYxLTzsVeSMfURxqi2SAUuE61rKuT5vd8HvmZAxWkGguebq8hDrcIYe2Ms5vdMhE2Vw0a_dbRtw01-t58mYWCWXbt1eqs7uT72VADCKCfG_yX95-37k3SF3lWHemfFfO0-4x_zecuqsVcmgH5K_HHZM9LcgHArRSN_u2bxCFr_Wty-2zA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:6000/file/file.txt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6000",
+					"path": [
+						"file",
+						"file.txt"
+					]
+				},
+				"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Update File Content",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful PUT request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJEX1h0Y2UzamtLX2tla0JqZ0pyR3p0UUk0blZCY2wybXRnWTYyY1V1OWJZIn0.eyJleHAiOjE3MzczMTkwMzQsImlhdCI6MTczNzMxODczNCwianRpIjoiMTY0Nzk3YWQtMTg0OC00NTMzLTk3NTEtMTk4NTQyNTI5YWUxIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9mbGFzay1yZWFsbSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI1MGU1ZjNmYi02MTZmLTQ2YzEtOGY5Ny04Njk0ZDdlODY3NGIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJmbGFzay1hcHAtY2xpZW50Iiwic2lkIjoiOWQxY2I0ZTMtOTk5Mi00YTkyLWE3YzAtMWI3NTU4NGY5NTg0IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1mbGFzay1yZWFsbSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJmbGFzay1hcHAtY2xpZW50Ijp7InJvbGVzIjpbImZsYXNrLXJvbGUiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIGVtYWlsIHByb2ZpbGUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IlRlc3QgVXNlciIsInByZWZlcnJlZF91c2VybmFtZSI6InRlc3RAYWJ2LmJnIiwiZ2l2ZW5fbmFtZSI6IlRlc3QiLCJmYW1pbHlfbmFtZSI6IlVzZXIiLCJlbWFpbCI6InRlc3RAYWJ2LmJnIn0.jR3CJH3_oTxSiRlPFLLfjJguVCThSoO1x-gozkKO386OV2SfOYnSitKwKP_Ljy-DX3hIFoi-FM-NTcvEjws-P_HkKiWqxjnZxxuIzQ9LaQ_ZzThAeLhMKtWjot2IeZjb9Xf74S-RocfSkamMEFHWi0tzGQC4eEfQWcy8XiYxLTzsVeSMfURxqi2SAUuE61rKuT5vd8HvmZAxWkGguebq8hDrcIYe2Ms5vdMhE2Vw0a_dbRtw01-t58mYWCWXbt1eqs7uT72VADCKCfG_yX95-37k3SF3lWHemfFfO0-4x_zecuqsVcmgH5K_HHZM9LcgHArRSN_u2bxCFr_Wty-2zA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "content",
+							"value": "Test 567",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:6000/file/file.txt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6000",
+					"path": [
+						"file",
+						"file.txt"
+					]
+				},
+				"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete file",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful PUT request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJEX1h0Y2UzamtLX2tla0JqZ0pyR3p0UUk0blZCY2wybXRnWTYyY1V1OWJZIn0.eyJleHAiOjE3MzczMTg0OTEsImlhdCI6MTczNzMxODE5MSwianRpIjoiNzY1NWYwNTMtMmE2Mi00NTlhLWI3ZDYtNzk0NTIwNDcwNjViIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9mbGFzay1yZWFsbSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI1MGU1ZjNmYi02MTZmLTQ2YzEtOGY5Ny04Njk0ZDdlODY3NGIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJmbGFzay1hcHAtY2xpZW50Iiwic2lkIjoiY2EyNjQ0M2QtMzBlMy00NjU5LTgxMzUtOWU0ZjljNDhkNTg2IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1mbGFzay1yZWFsbSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJmbGFzay1hcHAtY2xpZW50Ijp7InJvbGVzIjpbImZsYXNrLXJvbGUiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIGVtYWlsIHByb2ZpbGUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IlRlc3QgVXNlciIsInByZWZlcnJlZF91c2VybmFtZSI6InRlc3RAYWJ2LmJnIiwiZ2l2ZW5fbmFtZSI6IlRlc3QiLCJmYW1pbHlfbmFtZSI6IlVzZXIiLCJlbWFpbCI6InRlc3RAYWJ2LmJnIn0.RpgHUWbZY6n3SapUVo8xzy_rq_y3-mkP_EpUqln7RiBNH7JMI1e6MSU9jX-jnMehpg2Utz1qKY9VZBCeFtCrrhowX7toXnlAP4_Nr-W34_nSb1ugUuwtIGcBMOj0gLL870iZK7Zjo3Ev2bDuzwGIcdwZOiSrHcv9mxJtAZc8YA41CUNSsnmB5MhcMA-5KM5zuafKNsJoa8VfIArL7RYeSWfEtyn6ZfJnFSaVLnUBGPomqmeQacIqMS1XEyagmZylxbyOXGEPu2PvV_crgp8amv6uPcYdH5seieTHCvFRAV6LtW3AD-dmomnnePHtL4Q1gt_vCN8jSYeq5KzWdloaRA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:6000/file/file.txt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6000",
+					"path": [
+						"file",
+						"file.txt"
+					]
+				},
+				"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,70 @@
+services:
+  nfs:
+    image: itsthenetwork/nfs-server-alpine:latest
+    container_name: nfs
+    restart: unless-stopped
+    privileged: true
+    environment:
+      - SHARED_DIRECTORY=/data
+    volumes:
+      - /data/nfs-storage:/data
+    ports:
+      - "2049:2049"
+    networks:
+      - local_network
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
+    environment:
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_PORT: 8080
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_HEALTH_ENABLED: "true"
+      KC_LOG_LEVEL: info
+      KEYCLOAK_FRONTEND_URL: http://localhost:8080/auth
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health/ready"]
+      interval: 15s
+      timeout: 2s
+      retries: 15
+    command: ["start-dev", "--http-port", "8080", "--import-realm"]
+    volumes:
+      - ./config/keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json
+    ports:
+      - "8080:8080"
+      - "7443:7443"
+    networks:
+      - local_network
+  app:
+    container_name: flask_nfs
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      UPLOAD_FOLDER: "/mnt/nfs"
+      NFS_PATH: "/data/nfs-storage"
+      KEYCLOAK_SERVER_URL: "http://localhost:8080"
+      KEYCLOAK_REALM: "flask-realm"
+      KEYCLOAK_CLIENT_ID: "flask-app-client"
+      KEYCLOAK_CLIENT_SECRET: "MhVnInButY9EQIQhMq7VsXqBH2uP598N"
+      SECRET_KEY: "D_Xtce3jkK_kekBjgJrGztQI4nVBcl2mtgY62cUu9bY"
+    ports:
+      - "6000:6000"
+    networks:
+      - local_network
+    volumes:
+      - /data/nfs-storage:/mnt/nfs
+    depends_on:
+      - nfs
+      - keycloak
+
+networks:
+  local_network:
+    driver: bridge
+
+
+
+
+
